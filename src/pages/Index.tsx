@@ -1,13 +1,13 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { BreathingCircle } from "@/components/BreathingCircle";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen">
+      <header className="fixed top-0 left-0 right-0 z-10 p-6 backdrop-blur-sm">
+        <h1 className="text-2xl font-light tracking-tight text-foreground">breathe</h1>
+      </header>
+      <BreathingCircle />
+    </main>
   );
 };
 
