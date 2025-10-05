@@ -211,17 +211,6 @@ export const BreathingCircle = () => {
           {isActive ? <Pause size={24} /> : <Play size={24} className="ml-0.5" />}
         </motion.button>
 
-        {/* Subtle instruction */}
-        {!isActive && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-muted-foreground text-sm text-center max-w-xs font-light"
-          >
-            4-7-8 breethin technique for calm and focus
-          </motion.p>
-        )}
       </div>
       
       <AnonymousCounter count={anonymousCount} />
