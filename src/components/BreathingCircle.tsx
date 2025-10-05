@@ -1,5 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useStreak } from "@/hooks/useStreak";
+import { useHaptics } from "@/hooks/useHaptics";
+import { useSound } from "@/hooks/useSound";
+import { useAnonymousCounter } from "@/hooks/useAnonymousCounter";
+import { StreakCounter } from "./StreakCounter";
+import { AnonymousCounter } from "./AnonymousCounter";
+import { ShareScreen } from "./ShareScreen";
+import { ControlToggle } from "./ControlToggle";
 
 type BreathPhase = "inhale" | "hold" | "exhale" | "rest";
 
@@ -14,6 +22,27 @@ export const BreathingCircle = () => {
   const [phase, setPhase] = useState<BreathPhase>("rest");
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
+  const [showShare, setShowShare] = useState(false);
+  const previousPhase = useRef<BreathPhase>("rest");
+
+  const { streak, incrementStreak } = useStreak();
+  const { enabled: hapticsEnabled, toggleHaptics, vibrate } = useHaptics();
+  const { enabled: soundEnabled, toggleSound, playExhaleSound } = useSound();
+  const anonymousCount = useAnonymousCounter();
+
+  useEffect(() => {
+    if (phase !== previousPhase.current) {
+      if (phase === "inhale") {
+        vibrate([100, 50, 100]);
+      } else if (phase === "exhale") {
+        vibrate([150]);
+        playExhaleSound();
+      } else if (phase === "hold") {
+        vibrate(200);
+      }
+      previousPhase.current = phase;
+    }
+  }, [phase, vibrate, playExhaleSound]);
 
   useEffect(() => {
     if (!isActive) return;
@@ -49,6 +78,12 @@ export const BreathingCircle = () => {
   const handleStop = () => {
     setIsActive(false);
     setPhase("rest");
+    
+    if (cycleCount > 0) {
+      incrementStreak();
+      setShowShare(true);
+    }
+    
     setCycleCount(0);
   };
 
@@ -79,7 +114,16 @@ export const BreathingCircle = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 gradient-breath">
+    <>
+      <StreakCounter streak={streak} />
+      <ControlToggle
+        soundEnabled={soundEnabled}
+        hapticsEnabled={hapticsEnabled}
+        onToggleSound={toggleSound}
+        onToggleHaptics={toggleHaptics}
+      />
+      
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 gradient-breath">
       <div className="flex flex-col items-center gap-12 w-full max-w-md">
         {/* Breathing Circle */}
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
@@ -174,6 +218,15 @@ export const BreathingCircle = () => {
           </motion.p>
         )}
       </div>
+      
+      <AnonymousCounter count={anonymousCount} />
     </div>
+
+    <ShareScreen
+      isOpen={showShare}
+      breathCount={cycleCount}
+      onClose={() => setShowShare(false)}
+    />
+    </>
   );
 };
