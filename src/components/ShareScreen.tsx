@@ -9,7 +9,7 @@ interface ShareScreenProps {
 
 export const ShareScreen = ({ isOpen, breathCount, onClose }: ShareScreenProps) => {
   const handleShare = async () => {
-    const text = `I just took ${breathCount} mindful breath${breathCount === 1 ? "" : "s"} 🌬️✨`;
+    const text = `I just took ${breathCount} mindful breeth${breathCount === 1 ? "" : "s"} 🌬️✨`;
     
     if (navigator.share) {
       try {
@@ -59,7 +59,7 @@ export const ShareScreen = ({ isOpen, breathCount, onClose }: ShareScreenProps) 
               Nice work
             </h2>
             <p className="text-xl text-muted-foreground font-light mb-12">
-              You took {breathCount} mindful breath{breathCount === 1 ? "" : "s"}
+              You took {breathCount} mindful breeth{breathCount === 1 ? "" : "s"}
             </p>
 
             <button
@@ -74,7 +74,7 @@ export const ShareScreen = ({ isOpen, breathCount, onClose }: ShareScreenProps) 
               onClick={onClose}
               className="mt-8 text-muted-foreground text-sm font-light"
             >
-              Continue breathing
+              Continue breethin
             </button>
           </motion.div>
         </motion.div>

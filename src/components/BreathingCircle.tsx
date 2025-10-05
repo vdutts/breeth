@@ -92,11 +92,11 @@ export const BreathingCircle = () => {
   const getPhaseText = () => {
     switch (phase) {
       case "inhale":
-        return "breathe in";
+        return "breeth in";
       case "hold":
         return "hold";
       case "exhale":
-        return "breathe out";
+        return "breeth out";
       default:
         return "ready";
     }
@@ -194,7 +194,7 @@ export const BreathingCircle = () => {
             animate={{ opacity: 1 }}
             className="text-muted-foreground text-sm font-medium"
           >
-            {cycleCount} {cycleCount === 1 ? "breath" : "breaths"}
+            {cycleCount} {cycleCount === 1 ? "breeth" : "breeths"}
           </motion.div>
         )}
 
@@ -216,7 +216,7 @@ export const BreathingCircle = () => {
             transition={{ delay: 0.5 }}
             className="text-muted-foreground text-sm text-center max-w-xs font-light"
           >
-            4-7-8 breathing technique for calm and focus
+            4-7-8 breethin technique for calm and focus
           </motion.p>
         )}
       </div>

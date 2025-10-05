@@ -38,11 +38,13 @@ All colors MUST be HSL.
 
     --radius: 1rem;
     
-    /* Breathing app specific tokens */
-    --gradient-calm: linear-gradient(135deg, hsl(250, 70%, 75%) 0%, hsl(200, 70%, 70%) 100%);
-    --gradient-breath: linear-gradient(180deg, hsl(250, 60%, 95%) 0%, hsl(200, 60%, 95%) 100%);
-    --glow-soft: 0 20px 60px -15px hsl(250 70% 60% / 0.3);
-    --glow-strong: 0 0 80px hsl(250 70% 60% / 0.4);
+    /* Breathing app specific tokens - dreamy & sexy */
+    --gradient-calm: linear-gradient(135deg, hsl(280, 80%, 70%) 0%, hsl(200, 85%, 65%) 50%, hsl(320, 75%, 70%) 100%);
+    --gradient-breath: linear-gradient(180deg, hsl(260, 60%, 96%) 0%, hsl(200, 65%, 94%) 50%, hsl(280, 55%, 96%) 100%);
+    --gradient-dreamy: linear-gradient(135deg, hsl(280, 70%, 75%) 0%, hsl(200, 75%, 70%) 100%);
+    --glow-soft: 0 20px 60px -15px hsl(280 70% 60% / 0.4);
+    --glow-strong: 0 0 100px hsl(280 70% 60% / 0.5), 0 0 150px hsl(200 70% 60% / 0.3);
+    --glow-stat: 0 8px 32px hsl(280 70% 60% / 0.15);
     --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-breath: all 4s cubic-bezier(0.4, 0, 0.6, 1);
 
@@ -92,8 +94,9 @@ All colors MUST be HSL.
     --input: 0 0% 15%;
     --ring: 250 70% 60%;
     
-    --gradient-calm: linear-gradient(135deg, hsl(250, 70%, 50%) 0%, hsl(200, 70%, 50%) 100%);
-    --gradient-breath: linear-gradient(180deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 5%) 100%);
+      --gradient-calm: linear-gradient(135deg, hsl(280, 80%, 45%) 0%, hsl(200, 85%, 40%) 50%, hsl(320, 75%, 45%) 100%);
+      --gradient-breath: linear-gradient(180deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 5%) 100%);
+      --gradient-dreamy: linear-gradient(135deg, hsl(280, 70%, 40%) 0%, hsl(200, 75%, 35%) 100%);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -117,8 +120,9 @@ All colors MUST be HSL.
       --border: 0 0% 15%;
       --input: 0 0% 15%;
       --ring: 250 70% 60%;
-      --gradient-calm: linear-gradient(135deg, hsl(250, 70%, 50%) 0%, hsl(200, 70%, 50%) 100%);
+      --gradient-calm: linear-gradient(135deg, hsl(280, 80%, 45%) 0%, hsl(200, 85%, 40%) 50%, hsl(320, 75%, 45%) 100%);
       --gradient-breath: linear-gradient(180deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 5%) 100%);
+      --gradient-dreamy: linear-gradient(135deg, hsl(280, 70%, 40%) 0%, hsl(200, 75%, 35%) 100%);
     }
   }
 }
@@ -145,12 +149,20 @@ All colors MUST be HSL.
     background: var(--gradient-breath);
   }
   
+  .gradient-dreamy {
+    background: var(--gradient-dreamy);
+  }
+  
   .glow-soft {
     box-shadow: var(--glow-soft);
   }
   
   .glow-strong {
     box-shadow: var(--glow-strong);
+  }
+  
+  .glow-stat {
+    box-shadow: var(--glow-stat);
   }
   
   .transition-smooth {
