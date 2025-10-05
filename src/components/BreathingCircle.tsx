@@ -23,6 +23,7 @@ export const BreathingCircle = () => {
   const [phase, setPhase] = useState<BreathPhase>("rest");
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
+  const [completedCycles, setCompletedCycles] = useState(0);
   const [showShare, setShowShare] = useState(false);
   const previousPhase = useRef<BreathPhase>("rest");
 
@@ -83,6 +84,7 @@ export const BreathingCircle = () => {
     setPhase("rest");
     
     if (cycleCount > 0) {
+      setCompletedCycles(cycleCount);
       incrementStreak();
       setShowShare(true);
     }
@@ -227,7 +229,7 @@ export const BreathingCircle = () => {
 
     <ShareScreen
       isOpen={showShare}
-      breathCount={cycleCount}
+      breathCount={completedCycles}
       onClose={() => setShowShare(false)}
     />
     </>
