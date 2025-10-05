@@ -19,7 +19,7 @@ export const useSound = () => {
     localStorage.setItem(SOUND_KEY, newValue.toString());
   };
 
-  const playExhaleSound = () => {
+  const playSound = (type: 'inhale' | 'hold' | 'exhale') => {
     if (!enabled) return;
 
     if (!audioContextRef.current) {
@@ -33,15 +33,28 @@ export const useSound = () => {
     oscillator.connect(gainNode);
     gainNode.connect(ctx.destination);
 
-    oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.6);
-
-    gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
-
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.6);
+    if (type === 'inhale') {
+      oscillator.frequency.setValueAtTime(220, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.4);
+      gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.4);
+    } else if (type === 'hold') {
+      oscillator.frequency.setValueAtTime(330, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.3);
+    } else {
+      oscillator.frequency.setValueAtTime(300, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.8);
+      gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.8);
+    }
   };
 
-  return { enabled, toggleSound, playExhaleSound };
+  return { enabled, toggleSound, playSound };
 };

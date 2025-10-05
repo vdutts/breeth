@@ -24,5 +24,9 @@ export const useHaptics = () => {
     }
   };
 
-  return { enabled, toggleHaptics, vibrate };
+  const vibrateInhale = () => vibrate([50, 30, 50, 30, 100]);
+  const vibrateHold = () => vibrate([200, 50, 100]);
+  const vibrateExhale = () => vibrate([100, 40, 80, 40, 120, 40, 150]);
+
+  return { enabled, toggleHaptics, vibrate, vibrateInhale, vibrateHold, vibrateExhale };
 };

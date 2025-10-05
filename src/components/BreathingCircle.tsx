@@ -26,23 +26,25 @@ export const BreathingCircle = () => {
   const previousPhase = useRef<BreathPhase>("rest");
 
   const { streak, incrementStreak } = useStreak();
-  const { enabled: hapticsEnabled, toggleHaptics, vibrate } = useHaptics();
-  const { enabled: soundEnabled, toggleSound, playExhaleSound } = useSound();
+  const { enabled: hapticsEnabled, toggleHaptics, vibrateInhale, vibrateHold, vibrateExhale } = useHaptics();
+  const { enabled: soundEnabled, toggleSound, playSound } = useSound();
   const anonymousCount = useAnonymousCounter();
 
   useEffect(() => {
     if (phase !== previousPhase.current) {
       if (phase === "inhale") {
-        vibrate([100, 50, 100]);
+        vibrateInhale();
+        playSound('inhale');
       } else if (phase === "exhale") {
-        vibrate([150]);
-        playExhaleSound();
+        vibrateExhale();
+        playSound('exhale');
       } else if (phase === "hold") {
-        vibrate(200);
+        vibrateHold();
+        playSound('hold');
       }
       previousPhase.current = phase;
     }
-  }, [phase, vibrate, playExhaleSound]);
+  }, [phase, vibrateInhale, vibrateHold, vibrateExhale, playSound]);
 
   useEffect(() => {
     if (!isActive) return;
