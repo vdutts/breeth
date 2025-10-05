@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Pause, Play } from "lucide-react";
 import { useStreak } from "@/hooks/useStreak";
 import { useHaptics } from "@/hooks/useHaptics";
 import { useSound } from "@/hooks/useSound";
@@ -173,13 +174,13 @@ export const BreathingCircle = () => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={phase}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 0.6, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.4 }}
                 className="text-center"
               >
-                <p className="text-2xl sm:text-3xl font-light text-white tracking-wide">
+                <p className="text-xl sm:text-2xl font-extralight text-white/80 tracking-widest uppercase">
                   {getPhaseText()}
                 </p>
               </motion.div>
@@ -201,11 +202,11 @@ export const BreathingCircle = () => {
         {/* Control Button */}
         <motion.button
           onClick={isActive ? handleStop : handleStart}
-          className="px-12 py-4 rounded-full bg-card text-foreground font-medium text-lg shadow-lg hover:shadow-xl transition-smooth backdrop-blur-sm border border-border/50"
-          whileHover={{ scale: 1.05 }}
+          className="w-16 h-16 rounded-full bg-card/60 text-foreground backdrop-blur-sm border border-border/30 flex items-center justify-center glow-stat transition-smooth hover:bg-card/80"
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          {isActive ? "pause" : "begin"}
+          {isActive ? <Pause size={24} /> : <Play size={24} className="ml-0.5" />}
         </motion.button>
 
         {/* Subtle instruction */}
